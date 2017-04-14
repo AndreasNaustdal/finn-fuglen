@@ -1,0 +1,122 @@
+<!doctype html>
+<html ng-app="finnfuglen">
+
+<head>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+  <script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="example.js"></script>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body>
+
+  <div class="container" ng-controller="FuglarCtrl" ng-click="
+      finnFugl();
+      oppdaterURLParametere(
+        kroppsdelFarger.Rygg,
+        kroppsdelFarger.Vinge,
+        kroppsdelFarger.Mage,
+        kroppsdelFarger.Hode,
+        storrelse,
+        beinlengde)">
+
+    <ui-view></ui-view>
+
+    <header>
+      <h1>Finn fuglen</h1>
+      <p class="text-right"><small>v1.0</small></p>
+    </header>
+    <div class="row button-wrapper-down">
+      <div class="col-xs-12">
+        <button type="button" class="btn btn-primary pull-right" ng-click="tomFelt()">
+          Tøm felt
+        </button>
+      </div>
+    </div>
+
+    <div class="row" ng-repeat="(kroppsdel, farge) in kroppsdelFarger">
+      <h4 class="col-xs-3">{{kroppsdel}}</h4>
+      <div class="col-xs-9">
+        <div class="btn-group pull-right">
+          <div class="btn-group button-wrapper-right" uib-dropdown>
+            <button type="button" class="btn btn-default" style="background-color: {{palette[farge]}}" uib-dropdown-toggle>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <label class="btn btn-block hide-text" style="background-color: {{palette.lilla}}" ng-model="kroppsdelFarger[kroppsdel]" uib-btn-radio="'lilla'" uncheckable>.</label>
+              </li>
+              <li>
+                <label class="btn btn-block hide-text" style="background-color: {{palette.rosa}}" ng-model="kroppsdelFarger[kroppsdel]" uib-btn-radio="'rosa'" uncheckable>.</label>
+              </li>
+              <li>
+                <label class="btn btn-block hide-text" style="background-color: {{palette.oransje}}" ng-model="kroppsdelFarger[kroppsdel]" uib-btn-radio="'oransje'" uncheckable>.</label>
+              </li>
+              <li>
+                <label class="btn btn-block hide-text" style="background-color: {{palette['blå']}}" ng-model="kroppsdelFarger[kroppsdel]" uib-btn-radio="'blå'" uncheckable>.</label>
+              </li>
+              <li>
+                <label class="btn btn-block hide-text" style="background-color: {{palette['rød']}}" ng-model="kroppsdelFarger[kroppsdel]" uib-btn-radio="'rød'" uncheckable>.</label>
+              </li>
+              <li>
+                <label class="btn btn-block hide-text" style="background-color: {{palette.gul}}" ng-model="kroppsdelFarger[kroppsdel]" uib-btn-radio="'gul'" uncheckable>.</label>
+              </li>
+            </ul>
+          </div>
+          <label class="btn btn-default hide-text" style="background-color: {{palette['grønn']}}" ng-model="kroppsdelFarger[kroppsdel]" uib-btn-radio="'grønn'" uncheckable><i class="glyphicon glyphicon-stop"></i></label>
+          <label class="btn btn-default hide-text" style="background-color: {{palette.kvit}}" ng-model="kroppsdelFarger[kroppsdel]" uib-btn-radio="'kvit'" uncheckable><i class="glyphicon glyphicon-stop"></i></label>
+          <label class="btn btn-default hide-text" style="background-color: {{palette.svart}}" ng-model="kroppsdelFarger[kroppsdel]" uib-btn-radio="'svart'" uncheckable><i class="glyphicon glyphicon-stop"></i></label>
+          <label class="btn btn-default hide-text" style="background-color: {{palette['grå']}}" ng-model="kroppsdelFarger[kroppsdel]" uib-btn-radio="'grå'" uncheckable><i class="glyphicon glyphicon-stop"></i></label>
+          <label class="btn btn-default hide-text" style="background-color: {{palette.brun}}" ng-model="kroppsdelFarger[kroppsdel]" uib-btn-radio="'brun'" uncheckable><i class="glyphicon glyphicon-stop"></i></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <h4 class="col-xs-3">Størrelse</h4>
+      <div class="col-xs-9">
+        <div class="btn-group pull-right">
+          <label class="btn btn-primary" ng-model="storrelse" uib-btn-radio="'stor'" uncheckable>Stor</label>
+          <label class="btn btn-primary" ng-model="storrelse" uib-btn-radio="'middels'" uncheckable>Middels</label>
+          <label class="btn btn-primary" ng-model="storrelse" uib-btn-radio="'liten'" uncheckable>Liten</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <h4 class="col-xs-3">Bein</h4>
+      <div class="col-xs-9">
+        <div class="btn-group pull-right">
+          <label class="btn btn-primary" ng-model="beinlengde" uib-btn-radio="'lange'" uncheckable>Lange tynne</label>
+          <label class="btn btn-primary" ng-model="beinlengde" uib-btn-radio="'korte'" uncheckable>Korte</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" ng-show="resultat.length > 0">
+      <div class="col-xs-3">
+        <h4>Poeng</h4>
+      </div>
+      <div class="col-xs-9">
+        <h4>Fugl</h4>
+      </div>
+    </div>
+    <div class="row" ng-show="resultat.length > 0" ng-repeat="r in resultat">
+      <div class="col-xs-3">
+        <uib-progressbar value="r[1]/6*100" type="{{r[1]>4?'success':r[1]>2?'warning':'danger'}}">{{r[1] + "/6"}}</uib-progressbar>
+      </div>
+      <div class="col-xs-9">
+        <a href="{{ 'https://no.wikipedia.org/wiki/' +  r[2] }}">{{r[0]}}</a>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

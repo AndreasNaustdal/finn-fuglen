@@ -1,0 +1,11 @@
+
+    .hide-text,
+    .hide-text:hover {
+      color: transparent;
+    }
+    .button-wrapper-down .btn {
+      margin-bottom:5px;
+    }
+    .button-wrapper-right .btn {
+      margin-right:5px;
+    }
