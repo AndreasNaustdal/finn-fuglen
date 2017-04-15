@@ -151,7 +151,8 @@ function sortertResultat(kroppsdelFarger, storrelse, beinlengde) {
     ['Svarthvit fluesnapper', 'svart', 'svart brun', 'kvit', 'svart', 'liten', 'korte', 'fluesnapper'],
     ['Toppmeis', 'grå', 'svart', 'grå', 'grå', 'liten', 'korte'],
     ['Trekryper', 'brun', 'brun', 'kvit', 'brun', 'liten', 'korte'],
-    ['Granmeis', 'grå', 'grå', 'grå', 'svart', 'liten', 'korte']
+    ['Granmeis', 'grå', 'grå', 'grå', 'svart', 'liten', 'korte'],
+    ['Tjeld', 'svart', 'svart kvit', 'kvit', 'svart', 'middels', 'korte']
   ];
 
   var a = {
